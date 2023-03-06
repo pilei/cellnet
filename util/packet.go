@@ -142,13 +142,16 @@ const (
 
 // MBMsgRecv 保存数据，做为 RecvMsgEvent 的Msg字段 pb消息包
 /*
+MBMsgRecv中 Header 对应下面的 Header
+		  	Data 	 对应下面的 Data
 type XXX struct {
 	Header
 	Data //主体实际数据
 }
 
 type Header struct {
-	??? 需要定义一下
+	Magic 	uint32
+	Length  uint32 // 主题实际数据的长度 len(Data)
 }
 */
 
@@ -159,6 +162,7 @@ type MBMsgRecv struct {
 
 // ConServerMsgRecv 保存数据，做为 RecvMsgEvent 的Msg字段 C++消息包
 /*
+ConServerMsgRecv 的Data 包含下面的 Header + Data
 type XXX struct {
 	Header
 	Data //主体实际数据
